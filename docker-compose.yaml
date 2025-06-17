@@ -1,7 +1,7 @@
 services:
-  api-aluno:
-    container_name: api-aluno
-    image: api-aluno
+  api-escola:
+    container_name: api-escola
+    image: api-escola
     build:
       context: .
     ports:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - db
     networks:
-      - api_aluno_network
+      - escola_network
   db:
     image: mysql:oraclelinux9
     container_name: db
@@ -31,7 +31,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - api_aluno_network
+      - escola_network
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
@@ -46,7 +46,7 @@ services:
     ports:
       - "8080:80"
     networks:
-      - api_aluno_network
+      - escola_network
 networks:
-  api_aluno_network:
+  escola_network:
     driver: bridge
