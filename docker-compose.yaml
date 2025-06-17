@@ -1,0 +1,52 @@
+services:
+  api-aluno:
+    container_name: api-aluno
+    image: api-aluno
+    build:
+      context: .
+    ports:
+      - 8282:80
+      # - 443:443
+    restart: unless-stopped
+    stdin_open: true
+    tty: true 
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    environment:
+      - APP_ENV=dev
+    depends_on:
+      - db
+    networks:
+      - api_aluno_network
+  db:
+    image: mysql:oraclelinux9
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: escola_database
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    networks:
+      - api_aluno_network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "8080:80"
+    networks:
+      - api_aluno_network
+networks:
+  api_aluno_network:
+    driver: bridge
