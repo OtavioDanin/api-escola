@@ -10,7 +10,7 @@ class AlunoSeeder extends Seeder
 {
     public function run()
     {
-        for ($i = 0; $i <= 10; $i++) {
+        for ($i = 0; $i <= 5; $i++) {
             Aluno::create([
                 'id' => Str::orderedUuid(),
                 'idTurma' => rand(1, 3),

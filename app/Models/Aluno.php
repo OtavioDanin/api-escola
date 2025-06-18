@@ -31,7 +31,7 @@ class Aluno extends Model
         return $this->belongsTo(Status::class, 'idStatus');
     }
 
-    public function turma(): BelongsTo
+    public function turmas(): BelongsTo
     {
         return $this->belongsTo(Turma::class, 'idTurma');
     }
