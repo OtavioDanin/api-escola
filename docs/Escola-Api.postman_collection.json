@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "7042197d-7bae-4a5a-942f-e59ce82ec483",
+		"name": "Escola-Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Aluno",
+			"item": [
+				{
+					"name": "Criar Aluno",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiaWF0IjoxNzUwMzA5MTY1LCJleHAiOjE3NTAzMTI3NjUsInN1YiI6MSwibmFtZSI6Ikx1aXoifQ.numVHz2kin9Q_-ElXUE3vY6R6dg-rVLsIPRkANjuAzw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Luiz\",\n    \"cpf\": \"620.286.720-56\",\n    \"dataNascimento\": \"1986-02-07\",\n    \"idTurma\": 1,\n    \"idStatus\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/api/aluno",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"api",
+								"aluno"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Aluno",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Requested-With",
+								"value": "XMLHttpRequest",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Luiz Danin\",\n    \"cpf\": \"71900290014\",\n    \"idTurma\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/api/aluno/01978606-c2f0-70f1-b887-f564f9d34d47",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"api",
+								"aluno",
+								"01978606-c2f0-70f1-b887-f564f9d34d47"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Alunos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/api/aluno",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"api",
+								"aluno"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Aluno",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0IiwiaWF0IjoxNzUwMzA5MTAxLCJleHAiOjE3NTAzMTI3MDEsInN1YiI6MSwibmFtZSI6Ikx1aXoifQ.XT0SPp9o_t0IOfII_cumtGxv7VmlfFSkb6CdCAo-_zA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/api/aluno/01978606-c2f0-70f1-b887-f564f9d34d47",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"api",
+								"aluno",
+								"01978606-c2f0-70f1-b887-f564f9d34d47"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Atualizar Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\":\"Aprovado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8282/api/status/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"api",
+								"status",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autorazação",
+			"item": [
+				{
+					"name": "Gerar Token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8282/api/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8282",
+							"path": [
+								"api",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,198 @@
+openapi: 3.0.3
+info:
+  title: API de Gerenciamento de Alunos
+  description: Microsserviço para cadastro e gestão de alunos com autenticação JWT
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+    description: Servidor de desenvolvimento
+
+paths:
+  /auth:
+    post:
+      tags:
+        - Autenticação
+      summary: Gera token JWT
+      responses:
+        '200':
+          description: Token gerado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  token_type:
+                    type: string
+                    example: "bearer"
+                  expires_in:
+                    type: integer
+                    example: 3600
+
+  /aluno:
+    post:
+      tags:
+        - Alunos
+      summary: Cria novo aluno
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Aluno'
+      responses:
+        '201':
+          description: Aluno criado com sucesso
+        '401':
+          description: Não autorizado
+        '422':
+          description: Validação falhou
+
+    get:
+      tags:
+        - Alunos
+      summary: Lista todos os alunos
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista de alunos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Aluno'
+
+  /aluno/{idAluno}:
+    get:
+      tags:
+        - Alunos
+      summary: Busca aluno por ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: idAluno
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dados do aluno
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aluno'
+        '404':
+          description: Aluno não encontrado
+
+    put:
+      tags:
+        - Alunos
+      summary: Atualiza aluno
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: idAluno
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlunoUpdate'
+      responses:
+        '200':
+          description: Aluno atualizado
+        '404':
+          description: Aluno não encontrado
+
+  /status/{idStatus}:
+    put:
+      tags:
+        - Status
+      summary: Atualiza status do aluno
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: idStatus
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum: [Aprovado, Cancelado]
+                  example: "Aprovado"
+      responses:
+        '200':
+          description: Status atualizado
+        '403':
+          description: Status inválido ou não permitido
+
+components:
+  schemas:
+    Aluno:
+      type: object
+      required:
+        - nome
+        - cpf
+        - dataNascimento
+      properties:
+        nome:
+          type: string
+          example: "João Silva"
+        cpf:
+          type: string
+          example: "12345678901"
+        dataNascimento:
+          type: string
+          format: date
+          example: "1990-01-01"
+        idTurma:
+          type: integer
+          example: 1
+        idStatus:
+          type: integer
+          example: 1
+
+    AlunoUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "João Silva"
+        cpf:
+          type: string
+          example: "12345678901"
+        dataNascimento:
+          type: string
+          format: date
+          example: "1990-01-01"
+        idTurma:
+          type: integer
+          example: 1
+        idStatus:
+          type: integer
+          example: 1
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

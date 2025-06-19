@@ -6,7 +6,7 @@ Microsserviço desenvolvido em Laravel para gerenciamento de cadastros de alunos
 
 ## 📋 Visão Geral
 
-Este projeto consiste em um microsserviço para gerenciamento de cadastros de alunos, desenvolvido com Laravel (última versão estável). O serviço oferece endpoints RESTful protegidos por autenticação via token JWT, com validações específicas para cada operação.
+Este é um repositório para teste da empresa Qualinfo. Consiste em um microsserviço para gerenciamento de cadastros de alunos, desenvolvido com Laravel (última versão estável). O serviço oferece endpoints RESTful protegidos por autenticação via token JWT, com validações específicas para cada operação.
 
 ## ✨ Funcionalidades
 
@@ -14,17 +14,17 @@ Este projeto consiste em um microsserviço para gerenciamento de cadastros de al
 - ✅ Atualização de cadastros com validação específica
 - ✅ Consulta de alunos (lista e individual)
 - ✅ Controle de status de alunos
-- 🔐 Autenticação via JWT (JSON Web Tokens)
+- 🔐 Autenticação via JWT (JSON Web Tokens) - Utilizando firebase/php-jwt  
 - 🛡️ Middlewares de validação e autenticação
-- 🏷️ Controle de acesso por perfis de usuário
+- 🏷️ Controle de acesso por perfis de usuário(TO DO)
 
 ## 🔧 Tecnologias Utilizadas
 
-- **Laravel** (Última versão estável)
+- **Laravel 12** (Última versão estável)
 - **Firebase JWT** para autenticação
 - **MySQL** (Banco de dados relacional)
 - **Eloquent ORM** (Mapeamento objeto-relacional)
-- **PHP 8.1+**
+- **PHP 8.3+**
 
 ## 🚀 Endpoints da API
 
@@ -43,3 +43,74 @@ Este projeto consiste em um microsserviço para gerenciamento de cadastros de al
 ## 🔒 Requisitos de Autenticação
 
 Todos os endpoints (exceto `/auth`) requerem autenticação via token JWT no header:
+
+Authorization: Bearer {seu_token_jwt}
+
+## 📦 Pré-requisitos
+
+- PHP 8.2+
+- Composer
+- MySQL 8+ ou MariaDB 10.3+
+- Extensão PHP para JWT
+
+## 🛠️ Instalação
+
+1. Clone o repositório:
+   ```bash
+   git clone git@github.com:OtavioDanin/api-escola.git
+   cd api-escola
+
+## 🚀 Como Instalar e Rodar
+
+Siga os passos abaixo para configurar e executar a aplicação em seu ambiente local.
+
+### Passos de Instalação do Projeto com Docker
+
+Certifique-se de ter instalado em sua máquina:
+
+* Docker
+* Docker Composer
+
+1.  **Faça o build das imagens e start dos caontainer, executando:**
+    ```bash
+    docker network create escola_network
+    docker compose up -d
+    ```
+3.  **Gere a Chave da Aplicação:**
+    ```bash
+    php artisan key:generate
+
+2.  **Instale as Dependências do Composer:**
+    ```bash
+    composer install # ou composer install --no-dev -o -a para produção
+    ```
+3.  **Execute as Migrações e Seeds:**
+    Isso criará as tabelas no banco de dados eulará com dados de exemplo (se você tiver seeders).
+    ```bash
+    php artisan migrate:fresh --seed
+    ```
+A aplicação estará disponível em `http://localhost`(porta 80), ou a porta que estiver definina docker-compose.yaml
+
+### Passos de Instalação do Projeto manualmente (sem Docker)
+
+Siga os passos abaixo para configurar e executar a aplicação em seu ambiente local.
+
+### Pré-requisitos
+
+Certifique-se de ter instalado em sua máquina:
+
+* PHP (>= 8.2)
+* Composer
+* Um servidor web (Nginx ou Apache)
+* Banco de dados MySQL 8+ ou MariaDB 10.3+ (configurado para a aplicação)
+
+## ⚙️ Tecnologias Utilizadas
+
+* **Laravel 12:** Framework PHP
+* **MySQL:** Banco de dados
+* **firebase/php-jwt:** Para validação e geração de token JWWT
+* **Nginx:** Servidor WEB de alto desenpenho
+
+## 📄 Licença
+
+Este projeto é de código aberto e está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT) (se aplicável).
