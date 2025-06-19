@@ -6,5 +6,5 @@ namespace App\Helpers;
 
 interface UniqueIdentifierInterface
 {
-    public function generate();
+    public function generate(): string;
 }

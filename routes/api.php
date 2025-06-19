@@ -1,14 +1,19 @@
 <?php
 
 use App\Http\Controllers\AlunoController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AuthorizationController;
+use App\Http\Controllers\StatusController;
+use App\Http\Middleware\AlunoUpdateValidate;
+use App\Http\Middleware\AlunoValidation;
+use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+// Route::apiResource("aluno", AlunoController::class);
+Route::post('/aluno', [AlunoController::class, 'store'])->name('store')->middleware(AlunoValidation::class)->middleware(JwtMiddleware::class);
+Route::put('/aluno/{idAluno}', [AlunoController::class, 'update'])->name('update')->middleware(AlunoUpdateValidate::class)->middleware(JwtMiddleware::class);
+Route::get('/aluno', [AlunoController::class, 'index'])->name('index')->middleware(JwtMiddleware::class);
+Route::get('/aluno/{idAluno}', [AlunoController::class, 'find'])->name('find')->middleware(JwtMiddleware::class);
 
-// Route::resource("aluno", AlunoController::class);
-Route::post('/aluno', [AlunoController::class, 'store'])->name('store');
+Route::put('/status/{idStatus}', [StatusController::class, 'update'])->name('update')->middleware(JwtMiddleware::class);
 
-
+Route::get('/auth', [AuthorizationController::class, 'generate'])->name('generate');

@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 
 class UniqueIdentifierRamsey implements UniqueIdentifierInterface
 {
-    public function generate()
+    public function generate(): string
     {
-        return Str::uuid7();
+        return Str::uuid7()->toString();
     }
 }

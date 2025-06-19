@@ -12,19 +12,19 @@ RUN apk add --no-cache \
     zip \
     unzip \
     oniguruma-dev \
-    postgresql-dev \
     && docker-php-ext-install \
     pdo_mysql \
     mbstring \
     zip \
     gd \
     opcache \
-    && docker-php-ext-enable opcache
+    intl \
+    && docker-php-ext-enable opcache intl
 
 RUN { \
     echo 'opcache.enable=1'; \
     echo 'opcache.revalidate_freq=0'; \
-    echo 'opcache.validate_timestamps=0'; \
+    echo 'opcache.validate_timestamps=1'; \
     echo 'opcache.max_accelerated_files=10000'; \
     echo 'opcache.memory_consumption=128'; \
     echo 'opcache.max_wasted_percentage=10'; \
