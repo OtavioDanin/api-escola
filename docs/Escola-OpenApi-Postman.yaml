@@ -1,0 +1,182 @@
+openapi: 3.0.0
+info:
+  title: Escola-Api
+  version: 1.0.0
+  description: ""
+servers:
+  - url: localhost
+paths:
+  /api/aluno:
+    parameters: []
+    post:
+      summary: Criar Aluno
+      parameters: []
+      responses:
+        "201":
+          description: Aluno criado com sucesso
+        "401":
+          description: Não autorizado
+        "422":
+          description: Validação falhou
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                cpf:
+                  type: string
+                dataNascimento:
+                  type: string
+                  format: date
+                idTurma:
+                  type: integer
+                idStatus:
+                  type: integer
+    get:
+      summary: Listar Alunos
+      parameters: []
+      responses:
+        "200":
+          description: Lista de alunos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Aluno"
+  /api/aluno/01978606-c2f0-70f1-b887-f564f9d34d47:
+    parameters: []
+    put:
+      summary: Atualizar Aluno
+      parameters:
+        - name: X-Requested-With
+          in: header
+          required: false
+          example: XMLHttpRequest
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Aluno atualizado
+        "404":
+          description: Aluno não encontrado
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                cpf:
+                  type: string
+                  format: utc-millisec
+                idTurma:
+                  type: integer
+    get:
+      summary: Consultar Aluno
+      parameters: []
+      responses:
+        "200":
+          description: Dados do aluno
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Aluno"
+        "404":
+          description: Aluno não encontrado
+  /api/status/2:
+    parameters: []
+    put:
+      summary: Atualizar Status
+      parameters: []
+      responses:
+        "200":
+          description: Status atualizado
+        "403":
+          description: Status inválido ou não permitido
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+  /api/auth:
+    parameters: []
+    get:
+      summary: Gerar Token
+      parameters: []
+      responses:
+        "200":
+          description: Token gerado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  token_type:
+                    type: string
+                    example: "bearer"
+                  expires_in:
+                    type: integer
+                    example: 3600
+components:
+  schemas:
+    Aluno:
+      type: object
+      required:
+        - nome
+        - cpf
+        - dataNascimento
+      properties:
+        nome:
+          type: string
+          example: "João Silva"
+        cpf:
+          type: string
+          example: "12345678901"
+        dataNascimento:
+          type: string
+          format: date
+          example: "1990-01-01"
+        idTurma:
+          type: integer
+          example: 1
+        idStatus:
+          type: integer
+          example: 1
+
+    AlunoUpdate:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: "João Silva"
+        cpf:
+          type: string
+          example: "12345678901"
+        dataNascimento:
+          type: string
+          format: date
+          example: "1990-01-01"
+        idTurma:
+          type: integer
+          example: 1
+        idStatus:
+          type: integer
+          example: 1
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
