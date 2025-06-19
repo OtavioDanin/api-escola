@@ -109,6 +109,7 @@ Certifique-se de ter instalado em sua máquina:
 * **Laravel 12:** Framework PHP
 * **MySQL:** Banco de dados
 * **firebase/php-jwt:** Para validação e geração de token JWWT
+* **laminas/laminas-validator:** Para validação segura e consistente dos Dados de entrada
 * **Nginx:** Servidor WEB de alto desenpenho
 
 ## 📄 Licença
