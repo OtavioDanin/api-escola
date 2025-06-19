@@ -18,6 +18,10 @@ Este é um repositório para teste da empresa Qualinfo. Consiste em um microsser
 - 🛡️ Middlewares de validação e autenticação
 - 🏷️ Controle de acesso por perfis de usuário(TO DO)
 
+## API-First
+O desenvolvimento desta API RESTFull foi baseado a partir da métotologia API-first em que as APIs são consideradas o componente central do processo de design de software. Em vez de começar pelo desenvolvimento de código ou pela interface do usuário ou pela lógica de negócios, o processo de desenvolvimento começa com o design da API que conectará os diferentes componentes do aplicativo, ou seja a preocupação inicial é a respeito do contrato que sua API deve respeitar. Isso garante que o sistema seja construído de forma modular e flexível desde o início.  
+
+Na pasta doc, na raiz da aplicação, é possível encontrar os documentos que expressam o contrato inicial que a API fio desenvolvida. Encontram-se as especificações OpenAPI, bem como a collection (Postman) para teste dos endpoints da API.
 
 ## 🚀 Endpoints da API
 
