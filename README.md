@@ -18,13 +18,6 @@ Este é um repositório para teste da empresa Qualinfo. Consiste em um microsser
 - 🛡️ Middlewares de validação e autenticação
 - 🏷️ Controle de acesso por perfis de usuário(TO DO)
 
-## 🔧 Tecnologias Utilizadas
-
-- **Laravel 12** (Última versão estável)
-- **Firebase JWT** para autenticação
-- **MySQL** (Banco de dados relacional)
-- **Eloquent ORM** (Mapeamento objeto-relacional)
-- **PHP 8.3+**
 
 ## 🚀 Endpoints da API
 
