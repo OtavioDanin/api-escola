@@ -39,7 +39,7 @@ class AlunoController extends Controller
         try {
             $data = $this->alunoDto::from($request->all())->all();
             $this->alunoService->update($id, $data);
-            return response()->json(['message' => 'Aluno cadastrado com sucesso.', 'statusCode' => Response::HTTP_OK], Response::HTTP_OK);
+            return response()->json(['message' => 'Aluno editado com sucesso.', 'statusCode' => Response::HTTP_OK], Response::HTTP_OK);
         } catch (AlunoException $aluException) {
             return response()->json(['message' => $aluException->getMessage(), 'statusCode' => Response::HTTP_NOT_FOUND], Response::HTTP_NOT_FOUND);
         } catch (QueryException) {

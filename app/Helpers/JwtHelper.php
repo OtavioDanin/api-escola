@@ -14,7 +14,7 @@ class JwtHelper
         $payload = [
             'iss' => env('APP_URL'),
             'iat' => time(),
-            'exp' => time() + env('JWT_EXPIRE', 3600), 
+            'exp' => time() + env('JWT_EXPIRE', 3600),
             'sub' => 1,
             'name' => 'Luiz',
         ];

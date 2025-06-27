@@ -25,4 +25,13 @@ class StatusService implements StatusServiceInterface
             throw new StatusException('Falha ao atualizar o status.');
         }
     }
+
+    public function getAll(): array
+    {
+        $status = $this->statusRepository->findAll();
+        if ($status->isEmpty()) {
+            throw new StatusException('Não existem status cadastrados.', 404);
+        }
+        return $status->toArray();
+    }
 }

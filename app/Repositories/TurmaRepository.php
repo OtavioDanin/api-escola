@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Turma;
+use Illuminate\Database\Eloquent\Collection;
 
 class TurmaRepository implements TurmaRepositoryInterface
 {
@@ -19,5 +20,10 @@ class TurmaRepository implements TurmaRepositoryInterface
     {
         $turma = $this->findById($id);
         return $this->turma->updateOrFail();
+    }
+
+    public function findAll(): Collection
+    {
+        return $this->turma::all();
     }
 }

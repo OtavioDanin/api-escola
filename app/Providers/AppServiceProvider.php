@@ -14,6 +14,8 @@ use App\Services\AlunoService;
 use App\Services\AlunoServiceInterface;
 use App\Services\StatusService;
 use App\Services\StatusServiceInterface;
+use App\Services\TurmaService;
+use App\Services\TurmaServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UniqueIdentifierInterface::class, UniqueIdentifierRamsey::class);
 
         $this->app->bind(TurmaRepositoryInterface::class, TurmaRepository::class);
+        $this->app->bind(TurmaServiceInterface::class, TurmaService::class);
 
         $this->app->bind(StatusServiceInterface::class, StatusService::class);
         $this->app->bind(StatusRepositoryInterface::class, StatusRepository::class);

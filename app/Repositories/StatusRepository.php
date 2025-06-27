@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Status;
+use Illuminate\Database\Eloquent\Collection;
 
 class StatusRepository implements StatusRepositoryInterface
 {
@@ -19,5 +20,10 @@ class StatusRepository implements StatusRepositoryInterface
     {
         $status = $this->findById($id);
         return $status?->update($statusRepository);
+    }
+
+    public function findAll(): Collection
+    {
+        return $this->status::all();
     }
 }

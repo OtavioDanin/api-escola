@@ -8,4 +8,5 @@ interface TurmaRepositoryInterface
 {
     public function findById(int $idTurma);
     public function update(int $id, array $data): bool;
+    public function findAll();
 }

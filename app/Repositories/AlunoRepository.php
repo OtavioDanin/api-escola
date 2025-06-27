@@ -44,7 +44,7 @@ class AlunoRepository implements AlunoRepositoryInterface
     public function searchListAluno(array $param, bool $allColumns = false): ?object
     {
         $current = current($param);
-        $keyColumns = ['alunos.nome', 'cpf', 'data_nascimento', 'turmas.nome as nomeTurma', 'status.nome as nomeStatus'];
+        $keyColumns = ['alunos.nome', 'cpf', 'data_nascimento', 'turmas.id as idTurma', 'turmas.nome as nomeTurma', 'status.id as idStatus', 'status.nome as nomeStatus'];
 
         $query = DB::table(self::TABLE);
         $query->where('alunos.' . key($param), '=', $current);
@@ -55,6 +55,6 @@ class AlunoRepository implements AlunoRepositoryInterface
 
     public function findAll(): Collection
     {
-        return $this->aluno::all();
+        return $this->aluno->orderBy('created_at', 'desc')->get();
     }
 }

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-interface StatusServiceInterface
+interface TurmaServiceInterface
 {
-    public function update(int $id, string $nomeStatus);
     public function getAll();
 }
