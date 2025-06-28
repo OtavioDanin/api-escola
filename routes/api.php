@@ -14,6 +14,7 @@ Route::post('/aluno', [AlunoController::class, 'store'])->name('store');//->midd
 Route::put('/aluno/{idAluno}', [AlunoController::class, 'update'])->name('update');//->middleware(AlunoUpdateValidate::class)->middleware(JwtMiddleware::class);
 Route::get('/aluno', [AlunoController::class, 'index'])->name('index');//->middleware(JwtMiddleware::class);
 Route::get('/aluno/{idAluno}', [AlunoController::class, 'find'])->name('find');//->middleware(JwtMiddleware::class);
+Route::delete('/aluno/{idAluno}', [AlunoController::class, 'remove'])->name('remove');//->middleware(JwtMiddleware::class);
 
 Route::put('/status/{idStatus}', [StatusController::class, 'update'])->name('update')->middleware(JwtMiddleware::class);
 Route::get('/status', [StatusController::class, 'index'])->name('index');

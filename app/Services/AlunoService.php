@@ -55,7 +55,7 @@ class AlunoService implements AlunoServiceInterface
 
         DB::transaction(function () use ($id, $alunoData) {
             $aluno =  $this->alunoRepository->update($id, $alunoData);
-            if(!isset($aluno)){
+            if (!isset($aluno)) {
                 throw new AlunoException('Aluno não encontrado para atualizar.', 404);
             }
             $aluno->turmas()->associate($alunoData['idTurma']);
@@ -78,5 +78,16 @@ class AlunoService implements AlunoServiceInterface
             throw new AlunoException('Aluno não encontrado.', 404);
         }
         return (array) $aluno;
+    }
+
+    public function remove(string $id): void
+    {
+        $hasDelete =  $this->alunoRepository->delete($id);
+        if ($hasDelete === null) {
+            throw new AlunoException('Aluno não encontrado para remoção.', 404);
+        }
+        if ($hasDelete === false) {
+            throw new AlunoException('Falha ao remove o Aluno.', 502);
+        }
     }
 }

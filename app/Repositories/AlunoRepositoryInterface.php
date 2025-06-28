@@ -12,4 +12,5 @@ interface AlunoRepositoryInterface
     public function searchByParam(array $param): ?object;
     public function findAll();
     public function searchListAluno(array $param): ?object;
+    public function delete(string $id);
 }

@@ -8,6 +8,7 @@ use App\DTO\AlunoDTO;
 use App\Exceptions\AlunoException;
 use App\Services\AlunoServiceInterface;
 use Illuminate\Database\QueryException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
@@ -19,7 +20,7 @@ class AlunoController extends Controller
         protected AlunoDTO $alunoDto
     ) {}
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         try {
             $data = $this->alunoDto::from($request->all())->all();
@@ -34,7 +35,7 @@ class AlunoController extends Controller
         }
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): JsonResponse
     {
         try {
             $data = $this->alunoDto::from($request->all())->all();
@@ -49,7 +50,7 @@ class AlunoController extends Controller
         }
     }
 
-    public function index()
+    public function index(): JsonResponse
     {
         try {
             $alunos = $this->alunoService->getAll();
@@ -62,7 +63,7 @@ class AlunoController extends Controller
     }
 
 
-    public function find(Request $request, string $id)
+    public function find(Request $request, string $id): JsonResponse
     {
         try {
             $aluno = $this->alunoService->findById($id);
@@ -71,6 +72,18 @@ class AlunoController extends Controller
             return response()->json(['message' => $aluException->getMessage(), 'statusCode' => Response::HTTP_NOT_FOUND], Response::HTTP_NOT_FOUND);
         } catch (Throwable) {
             return response()->json(['message' => 'Ocorreu um Erro inesperado.', 'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function remove(string $id): JsonResponse
+    {
+        try {
+            $this->alunoService->remove($id);
+            return response()->json(['message' => 'Aluno removido com sucesso.', 'statusCode' => Response::HTTP_OK], Response::HTTP_OK);
+        } catch (AlunoException $aluException) {
+            return response()->json(['message' => $aluException->getMessage(), 'statusCode' => Response::HTTP_BAD_GATEWAY], Response::HTTP_BAD_GATEWAY);
+        } catch (Throwable) {
+            return response()->json(['message' => 'Ocorreu um Erro inesperado ao remover o aluno.', 'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

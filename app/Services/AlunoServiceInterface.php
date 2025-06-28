@@ -10,4 +10,5 @@ interface AlunoServiceInterface
     public function update(string $id, array $livroData): void;
     public function getAll();
     public function findById(string $id);
+    public function remove(string $id);
 }

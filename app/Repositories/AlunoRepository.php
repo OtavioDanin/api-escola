@@ -57,4 +57,10 @@ class AlunoRepository implements AlunoRepositoryInterface
     {
         return $this->aluno->orderBy('created_at', 'desc')->get();
     }
+
+    public function delete(string $id): ?bool
+    {
+        $aluno = $this->findById($id);
+        return $aluno?->deleteOrFail($id);
+    }
 }
