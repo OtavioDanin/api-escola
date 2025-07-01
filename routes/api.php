@@ -10,7 +10,7 @@ use App\Http\Middleware\JwtMiddleware;
 use Illuminate\Support\Facades\Route;
 
 // Route::apiResource("aluno", AlunoController::class);
-Route::post('/aluno', [AlunoController::class, 'store'])->name('store')->middleware(AlunoValidation::class);
+Route::post('/aluno', [AlunoController::class, 'store'])->name('store')->middleware(AlunoValidation::class)->middleware(JwtMiddleware::class);
 Route::put('/aluno/{idAluno}', [AlunoController::class, 'update'])->name('update')->middleware(AlunoUpdateValidate::class)->middleware(JwtMiddleware::class);
 Route::get('/aluno', [AlunoController::class, 'index'])->name('index')->middleware(JwtMiddleware::class);
 Route::get('/aluno/{idAluno}', [AlunoController::class, 'find'])->name('find')->middleware(JwtMiddleware::class);
